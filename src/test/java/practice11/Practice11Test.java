@@ -186,4 +186,32 @@ public class Practice11Test {
 
         assertThat(systemOut().endsWith("I am Tom. I know Jerry become Leader of Class 2.\n")).isTrue();
     }
+
+	@Test
+	public void should_computer_be_notified_when_any_class_it_teaches_assigned_a_leader() throws Exception {
+		LinkedList<practice11.Klass> linkedList = new LinkedList<Klass>();
+		linkedList.add(klass2);
+		Computer computer = new Computer("w10",linkedList);
+		Student jerry = new Student(1, "Jerry", 8, new Klass(3));
+		klass2.appendMember(jerry);
+		klass2.assignLeader(jerry);
+
+		assertThat(systemOut().endsWith("I am the Machine. I know Jerry has joined Class 2.\n" +
+				"I am the Machine. I know Jerry become Leader of Class 2.\n")).isTrue();
+	}
+	@Test
+	public void should_computer_and_teacher_be_notified_when_any_class_it_teaches_assigned_a_leader() throws Exception {
+		LinkedList<practice11.Klass> linkedList = new LinkedList<Klass>();
+		linkedList.add(klass2);
+		Computer computer = new Computer("w10",linkedList);
+		Teacher tom = new Teacher(1, "Tom", 21, linkedList);
+		Student jerry = new Student(1, "Jerry", 8, new Klass(3));
+		klass2.appendMember(jerry);
+		klass2.assignLeader(jerry);
+
+		assertThat(systemOut().endsWith("I am the Machine. I know Jerry has joined Class 2.\n" +
+				"I am Tom. I know Jerry has joined Class 2.\n" +
+				"I am the Machine. I know Jerry become Leader of Class 2.\n" +
+				"I am Tom. I know Jerry become Leader of Class 2.\n")).isTrue();
+	}
 }
