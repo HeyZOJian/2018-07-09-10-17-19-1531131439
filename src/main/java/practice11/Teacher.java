@@ -1,4 +1,4 @@
-package practice10;
+package practice11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Vito Zhuang on 7/10/2018.
  */
-public class Teacher extends Person {
+public class Teacher extends Person implements Observer {
 
 	private List<Klass> klasses;
 	private boolean haveKlass;
@@ -20,6 +20,9 @@ public class Teacher extends Person {
 		super(id, name, age);
 		this.klasses = klasses;
 		this.haveKlass = true;
+		for(Klass klass : klasses){
+			klass.addObserver(this);
+		}
 	}
 
 	@Override
@@ -68,5 +71,10 @@ public class Teacher extends Person {
 
 	public void setHaveKlass(boolean haveKlass) {
 		this.haveKlass = haveKlass;
+	}
+
+	@Override
+	public void update(String message) {
+		System.out.print(String.format("I am %s. %s.\n",this.getName(), message));
 	}
 }

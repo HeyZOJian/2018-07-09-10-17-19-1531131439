@@ -1,13 +1,14 @@
-package practice10;
+package practice11;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Klass {
+public class Klass extends Subject {
 	private int number;
 	private Student leader;
 	private List<Student> students = new ArrayList<>();
+	private List<Observer> observers = new ArrayList<>();
 
 	public Klass(int number) {
 		this.number = number;
@@ -18,14 +19,17 @@ public class Klass {
 	}
 
 	public void assignLeader(Student student) {
-		if (isMember(student))
+		if (isMember(student)) {
 			this.leader = student;
+			noticeAllObserver(String.format("I know %s become Leader of Class %s", student.getName(),this.number));
+		}
 		else
 			System.out.print("It is not one of us.\n");
 	}
 
 	public void appendMember(Student student) {
 		this.students.add(student);
+		noticeAllObserver(String.format("I know %s has joined Class %s",student.getName(),this.number));
 	}
 
 	public boolean isMember(Student student) {
@@ -34,12 +38,6 @@ public class Klass {
 				.filter(student1 -> student1.getId() == student.getId())
 				.collect(Collectors.toList())
 				.size() > 0;
-//		for(Student x: students){
-//			if(x.getId() == student.getId()){
-//				return true;
-//			}
-//		}
-//		return false;
 	}
 
 	public int getNumber() {
@@ -62,5 +60,22 @@ public class Klass {
 		if (leader != null)
 			return leader.getId();
 		return -1;
+	}
+
+	@Override
+	public void addObserver(Observer observer) {
+		observers.add(observer);
+	}
+
+	@Override
+	public void deleteObserver(Observer observer) {
+
+	}
+
+	@Override
+	public void noticeAllObserver(String message) {
+		for(Observer observer : observers){
+			observer.update(message);
+		}
 	}
 }
