@@ -1,9 +1,7 @@
-package practice09;
+package practice10;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Klass {

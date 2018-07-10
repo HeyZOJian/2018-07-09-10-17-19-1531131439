@@ -1,11 +1,14 @@
-package practice09;
+package practice10;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Vito Zhuang on 7/10/2018.
  */
 public class Teacher extends Person {
 
-	private Klass klass;
+	private List<Klass> klasses;
 	private boolean haveKlass;
 
 	public Teacher(int id, String name, int age) {
@@ -13,45 +16,50 @@ public class Teacher extends Person {
 		this.haveKlass = false;
 	}
 
-	public Teacher(int id, String name, int age, Klass klass) {
+	public Teacher(int id, String name, int age, List<Klass> klasses) {
 		super(id, name, age);
-		this.klass = klass;
+		this.klasses = klasses;
 		this.haveKlass = true;
 	}
 
 	@Override
 	public String introduce() {
-		return String.format(super.introduce() + " I am a Teacher. I teach %s.", getKlassDisplayName());
+		return String.format(super.introduce() + " I am a Teacher. I teach %s.", getKlassesDisplayName());
 	}
 
 	public String introduceWith(Student student) {
-		String isTeachStudentStr = isTeachStudent(student.getKlass()) ?
+		String isTeachStudentStr = isTeaching(student) ?
 				" I teach " + student.getName() + "." :
 				" I don't teach " + student.getName() + ".";
 		return String.format(super.introduce() + " I am a Teacher.%s",
 				isTeachStudentStr);
 	}
 
-	public String getKlassDisplayName() {
+	public String getKlassesDisplayName() {
+		List<String> klassesName = new ArrayList<>();
 		if (this.haveKlass) {
-			return this.klass.getDisplayName();
+			for (Klass klass : klasses) {
+				klassesName.add(String.valueOf(klass.getNumber()));
+			}
+			return "Class " + String.join(", ", klassesName);
 		}
 		return "No Class";
 	}
 
-	public boolean isTeachStudent(Klass studentKlass) {
-		if (this.klass.getNumber() == studentKlass.getNumber()) {
-			return true;
+	public boolean isTeaching(Student student) {
+		for (Klass klass : klasses) {
+			if (klass.getDisplayName().equals(student.getKlassName()))
+				return true;
 		}
 		return false;
 	}
 
-	public Klass getKlass() {
-		return klass;
+	public List<Klass> getClasses() {
+		return klasses;
 	}
 
-	public void setKlass(Klass klass) {
-		this.klass = klass;
+	public void setKlasses(List<Klass> klass) {
+		this.klasses = klass;
 	}
 
 	public boolean isHaveKlass() {

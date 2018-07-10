@@ -1,4 +1,4 @@
-package practice09;
+package practice10;
 
 import java.util.Objects;
 
