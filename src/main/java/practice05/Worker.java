@@ -1,4 +1,4 @@
-package practice04;
+package practice05;
 
 public class Worker extends Person {
 	public Worker(String name, int age) {
