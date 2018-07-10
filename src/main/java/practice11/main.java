@@ -1,7 +1,7 @@
-package practice06;
+package practice11;
 
 /**
  * Created by Vito Zhuang on 7/10/2018.
  */
-public class Teacher {
+public class main {
 }
