@@ -1,4 +1,4 @@
-package practice07;
+package practice08;
 
 /**
  * Created by Vito Zhuang on 7/10/2018.
@@ -8,13 +8,13 @@ public class Teacher extends Person {
 	private Klass klass;
 	private boolean haveKlass;
 
-	public Teacher(String name, int age) {
-		super(name, age);
+	public Teacher(int id, String name, int age) {
+		super(id, name, age);
 		this.haveKlass = false;
 	}
 
-	public Teacher(String name, int age, Klass klass) {
-		super(name, age);
+	public Teacher(int id, String name, int age, Klass klass) {
+		super(id, name, age);
 		this.klass = klass;
 		this.haveKlass = true;
 	}

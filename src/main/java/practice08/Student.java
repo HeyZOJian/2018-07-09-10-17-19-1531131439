@@ -1,16 +1,25 @@
-package practice07;
+package practice08;
 
 public class Student extends Person {
 	private Klass klass;
 
-	public Student(String name, int age, Klass klass) {
-		super(name, age);
+	public Student(int id, String name, int age, Klass klass) {
+		super(id, name, age);
 		this.klass = klass;
 	}
 
 	@Override
 	public String introduce() {
-		return super.introduce() + " " + String.format("I am a Student. I am at %s.", this.klass.getDisplayName());
+		String introduceStr = super.introduce() + " I am a Student.";
+		if (isLeaderInKlass())
+			introduceStr += " I am Leader of " + this.getKlassName() + ".";
+		else
+			introduceStr += " I am at " + this.getKlassName() + ".";
+		return introduceStr;
+	}
+
+	public boolean isLeaderInKlass() {
+		return this.getId() == this.klass.getLeaderId();
 	}
 
 	public Klass getKlass() {
@@ -19,5 +28,9 @@ public class Student extends Person {
 
 	public void setKlass(Klass klass) {
 		this.klass = klass;
+	}
+
+	public String getKlassName() {
+		return this.klass.getDisplayName();
 	}
 }
