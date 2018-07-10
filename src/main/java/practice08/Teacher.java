@@ -25,7 +25,7 @@ public class Teacher extends Person {
 	}
 
 	public String introduceWith(Student student) {
-		String isTeachStudentStr = isTeachStudent(student.getKlass()) ?
+		String isTeachStudentStr = isTeaching(student) ?
 				" I teach " + student.getName() + "." :
 				" I don't teach " + student.getName() + ".";
 		return String.format(super.introduce() + " I am a Teacher.%s",
@@ -39,8 +39,8 @@ public class Teacher extends Person {
 		return "No Class";
 	}
 
-	public boolean isTeachStudent(Klass studentKlass) {
-		if (this.klass.getNumber() == studentKlass.getNumber()) {
+	public boolean isTeaching(Student student) {
+		if (this.klass.getDisplayName().equals(student.getKlassName())) {
 			return true;
 		}
 		return false;
